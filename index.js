@@ -155,8 +155,13 @@ var findmyphone = {
 			return callback("No location in device");
 		}
 
-		var googleUrl = "http://maps.googleapis.com/maps/api/geocode/json" +
+		var googleUrl = "https://maps.googleapis.com/maps/api/geocode/json" +
 			"?latlng=%d,%d&sensor=true";
+
+		// Append api key if available
+		if(findmyphone.google_api_key){
+			googleUrl += "&key=" + findmyphone.google_api_key;
+		}
 
 		googleUrl =
 			util.format(googleUrl,
@@ -183,8 +188,13 @@ var findmyphone = {
 	getDistanceOfDevice: function(device, myLatitude, myLongitude, callback) {
 		if (device.location) {
 
-			var googleUrl = "http://maps.googleapis.com/maps/api/distancematrix/json" +
+			var googleUrl = "https://maps.googleapis.com/maps/api/distancematrix/json" +
 				"?origins=%d,%d&destinations=%d,%d&mode=driving&sensor=false";
+
+			// Append api key if available
+			if(findmyphone.google_api_key){
+				googleUrl += "&key=" + findmyphone.google_api_key;
+			}
 
 			googleUrl =
 				util.format(googleUrl, myLatitude, myLongitude,
